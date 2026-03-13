@@ -23,7 +23,7 @@ function fixturePreviewPlugin(): any {
           return
         }
 
-        const script = '<script type="module" src="/src/content/index.ts"></script>'
+        const script = '<script type="module" src="/src/index.ts"></script>'
         html = html.replace('</body>', `${script}</body>`)
 
         server
@@ -45,7 +45,7 @@ export default defineConfig({
   plugins: [fixturePreviewPlugin()],
   build: {
     lib: {
-      entry: resolve(__dirname, 'src/content/index.ts'),
+      entry: resolve(__dirname, 'src/index.ts'),
       formats: ['iife'],
       name: 'GitHubCopyIconExtension',
       fileName: () => 'content.js',

@@ -3,7 +3,7 @@ import { resolve } from 'node:path'
 import { JSDOM } from 'jsdom'
 import { describe, expect, it, vi } from 'vitest'
 
-import { enhancePage } from '../src/content/copy-extension'
+import { enhancePage } from '../src/copy-extension'
 
 const fixturesDir = resolve(__dirname, 'fixtures')
 const overrideHtml = !!process.env.OVERRIDE_HTML
