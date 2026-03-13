@@ -1,7 +1,7 @@
 <h1 align="center">Github-Copy-LLM</h1>
 
 <p align="center">
-  <img src="./assets/screenshot.png" alt="GitHub Copy LLM screenshot" width="600" style="border-radius: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+  <img src="./assets/screenshot.png" alt="GitHub Copy LLM screenshot" width="600">
 </p>
 
 <p align="center">
