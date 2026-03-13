@@ -109,18 +109,19 @@ export function initContentScript(doc: Document = document): void {
 function createCopyButton(doc: Document, target: CopyTarget, deps: CopyDeps): HTMLButtonElement {
   const button = doc.createElement('button')
   button.type = 'button'
-  button.className = 'Button--secondary Button--small Button gh-copy-icon-button'
+  button.className = 'Button--invisible Button--small Button gh-copy-icon-button'
   button.setAttribute(BUTTON_ATTRIBUTE, target.kind)
   button.setAttribute('aria-label', 'Copy raw markdown')
   button.setAttribute('title', 'Copy raw markdown')
   button.innerHTML = copyIconMarkup
 
+  let busy = false
   button.addEventListener('click', async () => {
-    if (button.disabled) {
+    if (busy) {
       return
     }
 
-    button.disabled = true
+    busy = true
 
     try {
       let text: string
@@ -131,19 +132,17 @@ function createCopyButton(doc: Document, target: CopyTarget, deps: CopyDeps): HT
       }
 
       await deps.copyText(text)
-      button.dataset.state = 'success'
       button.setAttribute('aria-label', 'Copied')
       button.setAttribute('title', 'Copied')
       button.innerHTML = successIconMarkup
 
       deps.setTimer(() => {
-        button.removeAttribute('data-state')
         button.setAttribute('aria-label', 'Copy raw markdown')
         button.setAttribute('title', 'Copy raw markdown')
         button.innerHTML = copyIconMarkup
       }, SUCCESS_DURATION_MS)
     } finally {
-      button.disabled = false
+      busy = false
     }
   })
 
@@ -251,18 +250,13 @@ function ensureStyles(doc: Document): void {
   style.id = STYLE_ID
   style.textContent = `
     .gh-copy-icon-button {
-      min-width: 32px;
-      margin-left: 8px;
-      padding: 0 8px;
+      padding: 7px !important;
     }
 
     .gh-copy-icon-button svg {
       display: block;
     }
 
-    .gh-copy-icon-button[data-state="success"] {
-      color: var(--fgColor-success, #1a7f37);
-    }
   `
 
   doc.head.append(style)
