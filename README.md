@@ -5,14 +5,14 @@
 </p>
 
 <p align="center">
-  Chrome extension that adds Copy-to-LLM button to GitHub's README and gists.
+  Chrome extension that adds Copy-to-LLM button to GitHub's README and gists
 </p>
 
 ## Features
 
 - 📎 Adds missing copy buttons to GitHub's repository READMEs and gists
 - 📃 Copies raw markdown instead of rendered page text
-- ⚡ Zero dependencies, lightweight, pure TypeScript
+- ⚡ Lightweight, zero dependencies
 
 ## Install Locally
 
