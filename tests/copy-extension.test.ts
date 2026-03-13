@@ -1,4 +1,4 @@
-import { readFileSync } from 'node:fs'
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 import { JSDOM } from 'jsdom'
 import { describe, expect, it, vi } from 'vitest'
@@ -6,9 +6,22 @@ import { describe, expect, it, vi } from 'vitest'
 import { enhancePage } from '../src/content/copy-extension'
 
 const fixturesDir = resolve(__dirname, 'fixtures')
+const overrideHtml = !!process.env.OVERRIDE_HTML
 
-function loadDocument(fileName: string, url: string): Document {
-  const html = readFileSync(resolve(fixturesDir, fileName), 'utf8')
+async function loadDocument(fileName: string, url: string): Promise<Document> {
+  const filePath = resolve(fixturesDir, fileName)
+  let html: string
+
+  if (overrideHtml || !existsSync(filePath)) {
+    const res = await fetch(url)
+    if (!res.ok) throw new Error(`Failed to fetch ${url}: ${res.status}`)
+    html = await res.text()
+    mkdirSync(fixturesDir, { recursive: true })
+    writeFileSync(filePath, html, 'utf8')
+  } else {
+    html = readFileSync(filePath, 'utf8')
+  }
+
   return new JSDOM(html, { url }).window.document
 }
 
@@ -19,7 +32,7 @@ async function flushMicrotasks(): Promise<void> {
 
 describe('enhancePage', () => {
   it('injects a copy button into gist headers and copies the raw content', async () => {
-    const doc = loadDocument(
+    const doc = await loadDocument(
       'gist-page.html',
       'https://gist.github.com/rxliuli/be31cbded41ef7eac6ae0da9070c8ef8',
     )
@@ -49,7 +62,7 @@ describe('enhancePage', () => {
   })
 
   it('injects a copy button into repository readme headers and derives the raw readme url', async () => {
-    const doc = loadDocument('github-userscripts-page.html', 'https://github.com/rxliuli/userscripts')
+    const doc = await loadDocument('github-userscripts-page.html', 'https://github.com/rxliuli/userscripts')
     const fetchText = vi.fn().mockResolvedValue('# copied from readme')
     const copyText = vi.fn().mockResolvedValue(undefined)
     const setTimer = vi.fn((callback: () => void) => {
@@ -71,8 +84,8 @@ describe('enhancePage', () => {
     expect(copyText).toHaveBeenCalledWith('# copied from readme')
   })
 
-  it('does not inject duplicate buttons when the scanner runs more than once', () => {
-    const doc = loadDocument('gist-page.html', 'https://gist.github.com/rxliuli/be31cbded41ef7eac6ae0da9070c8ef8')
+  it('does not inject duplicate buttons when the scanner runs more than once', async () => {
+    const doc = await loadDocument('gist-page.html', 'https://gist.github.com/rxliuli/be31cbded41ef7eac6ae0da9070c8ef8')
     const deps = {
       fetchText: vi.fn().mockResolvedValue('copy'),
       copyText: vi.fn().mockResolvedValue(undefined),

@@ -6,7 +6,8 @@
   "scripts": {
     "build": "tsc -b && vite build",
     "typecheck": "tsc -b --noEmit",
-    "test": "vitest run"
+    "test": "vitest run",
+    "test:override": "OVERRIDE_HTML=1 vitest run"
   },
   "devDependencies": {
     "@types/chrome": "^0.1.24",
