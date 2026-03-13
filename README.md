@@ -1,11 +1,11 @@
-<h1 align="center">Github-Copy-LLM</h1>
+<h1 align="center">Github-Copy-to-LLM</h1>
 
 <p align="center">
   <img src="./assets/screenshot.png" alt="GitHub Copy LLM screenshot" width="600">
 </p>
 
 <p align="center">
-  GitHub lacks copy-for-LLM buttons in key places. This extension fixes that.
+  Chrome extension that adds Copy-to-LLM button to GitHub's README and gists.
 </p>
 
 ## Features
@@ -16,9 +16,6 @@
 
 ## Install Locally
 
-1. Run `npm install`
-2. Run `npm run build`
-3. Open `chrome://extensions`
-4. Enable `Developer mode`
-5. Click `Load unpacked`
-6. Select the `dist/` folder
+1. Run `npm install && npm run build`
+2. Open `chrome://extensions` and enable `Developer mode`
+3. Click `Load unpacked` and select the `dist/` folder
