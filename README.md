@@ -4,15 +4,11 @@
   GitHub lacks copy-for-LLM buttons in key places. This extension fixes that.
 </p>
 
-Adds native-looking copy buttons to GitHub READMEs and markdown Gists.
-
 ## Features
 
-- Adds a missing copy button to repository READMEs on GitHub
-- Adds a missing copy button to markdown Gists
+- Adds missing copy buttons to GitHub's repository READMEs and gists
 - Copies raw markdown instead of rendered page text
 - Uses GitHub-style icons and button styling
-- Shows a success checkmark for a couple of seconds after copy
 
 ## Install Locally
 
