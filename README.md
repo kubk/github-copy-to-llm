@@ -12,7 +12,7 @@
 
 - 📎 Adds missing copy buttons to GitHub's repository READMEs and gists
 - 📃 Copies raw markdown instead of rendered page text
-- 💅 Uses GitHub-style icons and button styling
+- ⚡ Zero dependencies, lightweight, pure TypeScript
 
 ## Install Locally
 
