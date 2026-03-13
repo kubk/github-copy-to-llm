@@ -109,7 +109,7 @@ export function initContentScript(doc: Document = document): void {
 function createCopyButton(doc: Document, target: CopyTarget, deps: CopyDeps): HTMLButtonElement {
   const button = doc.createElement('button')
   button.type = 'button'
-  button.className = 'Button--invisible Button--small Button gh-copy-icon-button'
+  button.className = 'Button--invisible Button--small Button gh-copy-icon-button mr-2'
   button.setAttribute(BUTTON_ATTRIBUTE, target.kind)
   button.setAttribute('aria-label', 'Copy raw markdown')
   button.setAttribute('title', 'Copy raw markdown')

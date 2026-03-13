@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "GitHub Markdown Copy Icon",
+  "name": "GitHub Copy LLM",
   "description": "Adds a copy button to GitHub repository READMEs and Gists.",
   "version": "0.0.0",
   "content_scripts": [
