@@ -251,6 +251,7 @@ function ensureStyles(doc: Document): void {
   style.textContent = `
     .gh-copy-icon-button {
       padding: 7px !important;
+      color: var(--fgColor-muted, var(--color-fg-muted)) !important;
     }
 
     .gh-copy-icon-button svg {
