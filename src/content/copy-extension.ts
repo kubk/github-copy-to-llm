@@ -38,9 +38,6 @@ const defaultDeps: CopyDeps = {
     if (!pending) {
       pending = fetch(url, {
         credentials: 'omit',
-        headers: {
-          'X-Requested-With': 'XMLHttpRequest',
-        },
       }).then(async (response) => {
         if (!response.ok) {
           throw new Error(`Failed to fetch markdown from ${url}`)
